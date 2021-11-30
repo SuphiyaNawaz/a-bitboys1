@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>
+            Streaming Data
+        </title>
+    </head>
+    <body>
+        <h2> Trades</h2>
+        <div id="trades">
+
+        </div>
+
+        <Script>
+            var binanceSocket = new WebSocket("wss://stream.binance.us:9443/ws/btcusd@trade");
+
+            var tradeDiv = document.getElementById('trades')
+            binanceSocket.onmessage = function (event) 
+            {
+                console.log(event.data);
+
+                var messageObject = JSON.parse(event.data)
+                tradeDiv.append(messageObject.p)
+            }
+        </Script>
+    </body>
+</html>
