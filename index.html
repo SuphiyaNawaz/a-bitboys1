@@ -26,40 +26,79 @@
     <body>
         <h1 style = "color:blue;"> BIT BOYS</h1>
 
-        <table>
+        <table id="mytbl"> 
             <tr>
               <th>Crypto Currency </th>
               <th>Current Price</th>
               <th>Current Quantity</th>
             </tr>
             <tr>
-              <td><div id="crypto"></td>
-              <td><div id="price"></div>
-                <td><div id="quantity"></div>
-            </td>
+              <td><div id="btcusd-crypto"></td>
+              <td><div id="btcusd-price"></div></td>
+                <td><div id="btcusd-quantity"></div></td>
             </tr>
-
+            <tr>
+                <td><div id="ethusd-crypto"></td>
+                <td><div id="ethusd-price"></div></td>
+                  <td><div id="ethusd-quantity"></div></td>
+              </tr>
+              <tr>
+                <td><div id="shibusd-crypto"></td>
+                <td><div id="shibusd-price"></div></td>
+                  <td><div id="shibusd-quantity"></div></td>
+              </tr>
           </table>
 
         
 
         <Script>
-            var binanceSocket = new WebSocket("wss://stream.binance.us:9443/ws/btcusd@trade");
-            var cryptoDiv = document.getElementById('crypto')
-            var priceDiv = document.getElementById('price')
-            var quantityDiv = document.getElementById('quantity')
-            binanceSocket.onmessage = function (event)
-            {
-                //console.log(event.data);
-                var messageObject = JSON.parse(event.data)
-                //console.log(price)
-                //tradeDiv.append(messageObject.p)
-                //tradeDiv.onreset(price)
-                //tradeDiv.replaceWith(messageObject.p)
-                cryptoDiv.innerHTML = messageObject.s + "<br>";
-                priceDiv.innerHTML = messageObject.p + "<br>";
-                quantityDiv.innerHTML = messageObject.q + "<br>";
-            }
+                var btcusdSocket = new WebSocket("wss://stream.binance.us:9443/ws/btcusd@trade");
+                var btcusdcryptoDiv = document.getElementById('btcusd-crypto')
+                var btcusdpriceDiv = document.getElementById('btcusd-price')
+                var btcusdquantityDiv = document.getElementById('btcusd-quantity')
+                btcusdSocket.onmessage = function (event)
+                {
+                    //console.log(event.data);
+                    var btcusdmessageObject = JSON.parse(event.data)
+                    //console.log(price)
+                    //tradeDiv.append(messageObject.p)
+                    //tradeDiv.onreset(price)
+                    //tradeDiv.replaceWith(messageObject.p)
+                    btcusdcryptoDiv.innerHTML = btcusdmessageObject.s + "<br>";
+                    btcusdpriceDiv.innerHTML = btcusdmessageObject.p + "<br>";
+                    btcusdquantityDiv.innerHTML = btcusdmessageObject.q + "<br>";
+                    
+
+                }
+                var ethusdSocket = new WebSocket("wss://stream.binance.us:9443/ws/ethusd@trade");
+                var ethusdcryptoDiv = document.getElementById('ethusd-crypto')
+                var ethusdpriceDiv = document.getElementById('ethusd-price')
+                var ethusdquantityDiv = document.getElementById('ethusd-quantity')
+                ethusdSocket.onmessage = function (event)
+                {
+                    var ethusdmessageObject = JSON.parse(event.data)
+                    ethusdcryptoDiv.innerHTML = ethusdmessageObject.s + "<br>";
+                    ethusdpriceDiv.innerHTML = ethusdmessageObject.p + "<br>";
+                    ethusdquantityDiv.innerHTML = ethusdmessageObject.q + "<br>";
+                    
+
+                }
+                var shibusdSocket = new WebSocket("wss://stream.binance.us:9443/ws/shibusdt@trade");
+                var shibusdcryptoDiv = document.getElementById('shibusd-crypto')
+                var shibusdpriceDiv = document.getElementById('shibusd-price')
+                var shibusdquantityDiv = document.getElementById('shibusd-quantity')
+                shibusdSocket.onmessage = function (event)
+                {
+                    var shibusdmessageObject = JSON.parse(event.data)
+                    shibusdcryptoDiv.innerHTML = shibusdmessageObject.s + "<br>";
+                    shibusdpriceDiv.innerHTML = shibusdmessageObject.p + "<br>";
+                    shibusdquantityDiv.innerHTML = shibusdmessageObject.q + "<br>";
+                    
+
+                }
+
+          
+            
         </Script>
     </body>
 </html>
