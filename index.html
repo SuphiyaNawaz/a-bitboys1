@@ -3,23 +3,62 @@
         <title>
             Streaming Data
         </title>
+        <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: center;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+            h1 {text-align:center;}
+            div {text-align:center;}
+            </style>
     </head>
     <body>
-        <h2> Trades</h2>
-        <div id="trades">
+        <h1 style = "color:blue;"> BIT BOYS</h1>
 
-        </div>
+        <table>
+            <tr>
+              <th>Crypto Currency </th>
+              <th>Current Price</th>
+              <th>Current Quantity</th>
+            </tr>
+            <tr>
+              <td><div id="crypto"></td>
+              <td><div id="price"></div>
+                <td><div id="quantity"></div>
+            </td>
+            </tr>
+
+          </table>
+
+        
 
         <Script>
             var binanceSocket = new WebSocket("wss://stream.binance.us:9443/ws/btcusd@trade");
-
-            var tradeDiv = document.getElementById('trades')
-            binanceSocket.onmessage = function (event) 
+            var cryptoDiv = document.getElementById('crypto')
+            var priceDiv = document.getElementById('price')
+            var quantityDiv = document.getElementById('quantity')
+            binanceSocket.onmessage = function (event)
             {
-                console.log(event.data);
-
+                //console.log(event.data);
                 var messageObject = JSON.parse(event.data)
-                tradeDiv.append(messageObject.p)
+                //console.log(price)
+                //tradeDiv.append(messageObject.p)
+                //tradeDiv.onreset(price)
+                //tradeDiv.replaceWith(messageObject.p)
+                cryptoDiv.innerHTML = messageObject.s + "<br>";
+                priceDiv.innerHTML = messageObject.p + "<br>";
+                quantityDiv.innerHTML = messageObject.q + "<br>";
             }
         </Script>
     </body>
